@@ -5,7 +5,7 @@ test_that("db() works", {
     db <- db()
     expect_s3_class(db, c("cellxgene_db", "character"))
     expect_true(nzchar(db))
-    json <- jsonlite::parse_json(db)
+    json <- j_query(db, as = "R")
     expect_type(json, "list")
     expect_true(length(json) >= 48L)
 })

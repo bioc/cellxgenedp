@@ -35,7 +35,7 @@ FACETS <- c(
 }
 
 #' @importFrom dplyr group_by ungroup count bind_cols tibble .data
-#' @importFrom jsonlite parse_json
+#'
 #' @rdname facets
 #'
 #' @description `facets()` is used to query the cellxgene database for

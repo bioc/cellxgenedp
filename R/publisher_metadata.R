@@ -54,7 +54,7 @@ authors <-
     function(cellxgene_db = db())
 {
     ## publisher_metadata can be NULL; filter for non-null values
-    cellxgene_db <- jmespath(cellxgene_db, "[?not_null(publisher_metadata)]")
+    cellxgene_db <- j_query(cellxgene_db, "[?not_null(publisher_metadata)]")
 
     author_length <-
         .jmes_to_r(cellxgene_db, "[*].publisher_metadata[].length(authors)")
@@ -87,7 +87,7 @@ publisher_metadata <-
     function(cellxgene_db = db())
 {
     ## publisher_metadata can be NULL; filter for non-null values
-    cellxgene_db <- jmespath(cellxgene_db, "[?not_null(publisher_metadata)]")
+    cellxgene_db <- j_query(cellxgene_db, "[?not_null(publisher_metadata)]")
 
     keys <- c(
         "is_preprint", "journal",

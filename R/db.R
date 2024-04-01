@@ -1,4 +1,6 @@
 #' @importFrom dplyr bind_rows mutate arrange desc
+#'
+#' @importFrom rjsoncons j_pivot
 .db <-
     function(overwrite)
 {
@@ -6,7 +8,7 @@
         .COLLECTIONS, "collections", overwrite = overwrite
     )
     readLines(path) |>
-        parse_json(simplifyVector = TRUE) |>
+        j_pivot(as = "tibble") |>
         bind_rows()
 }
 

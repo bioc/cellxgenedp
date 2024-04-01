@@ -22,12 +22,11 @@
     .is_scalar(x) && is.logical(x)
 }
 
-#' @importFrom rjsoncons jmespath
+#' @importFrom rjsoncons j_query
 .jmes_to_r <-
     function(db, path, ..., simplifyVector = TRUE)
 {
-    jmespath(db, path) |>
-        parse_json(..., simplifyVector = simplifyVector)
+    j_query(db, path, as = "R")
 }
 
 .onLoad <-

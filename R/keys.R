@@ -6,9 +6,10 @@
     query <- paste0(query_base, ".keys(@)")
     key_names <-
         .jmes_to_r(db, query) |>
+        unlist() |>
+        sort() |>
         setdiff(.KEYS_BLOCKLIST)
-    path_base <- gsub("[0]", "[]", query_base, fixed = TRUE)
-    key_paths <- paste0(path_base, ".", key_names)
+    key_paths <- paste0(query_base, ".", key_names)
     names(key_paths) <- key_names
     key_paths
 }
@@ -18,9 +19,9 @@ keys <-
     function(cellxgene_db = db())
 {
     queries <- c(
-        collections = "[0]",
-        datasets = "[0].datasets[0]",
-        files = "[0].datasets[0].assets[0]"
+        collections = "[]",
+        datasets = "[].datasets[]",
+        files = "[].datasets[].assets[]"
     )
     lapply(queries, .keys, db = cellxgene_db)
 }

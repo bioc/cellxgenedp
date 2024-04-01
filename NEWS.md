@@ -1,5 +1,7 @@
 # cellxgenedp 1.6
-  
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
 * (v 1.6.1) Update vignette section on dataset visualization to
   accomodate changes in the 'Discover' API.
   https://github.com/mtmorgan/cellxgenedp/issues/15
@@ -7,6 +9,11 @@
 * (v 1.5.2) use CELLxGENE 'Discover' API, changing column names of
   some return values. See 'API changes' of the 'Discover and download
   datasets...' vignette.
+
+BUG FIXES
+
+* (v 1.6.2) Use all collections, datasets, and files when
+  identifying available columns.
 
 # cellxgenedp 1.4
 
