@@ -12,15 +12,25 @@
         bind_rows()
 }
 
+#' @importFrom cli cli_progress_bar cli_progress_update
+#'     cli_progress_done
 .db_detail <-
-    function(id, overwrite)
+    function(collection_id, overwrite)
 {
-    ## be sure to return a result & check for errors
-    tryCatch({
-        uri <- paste0(.COLLECTIONS, id)
-        path <- .cellxgene_cache_get(uri, overwrite = overwrite)
-        readLines(path)
-    }, error = identity)
+    n_collections <- length(collection_id)
+    result <- vector("list", n_collections)
+    cli_progress_bar("Collections", total = n_collections)
+    for (i in seq_len(n_collections)) {
+        ## be sure to return a result & check for errors
+        result[[i]] <- tryCatch({
+            uri <- paste0(.COLLECTIONS, collection_id[[i]])
+            path <- .cellxgene_cache_get(uri, overwrite = overwrite)
+            readLines(path)
+        }, error = identity)
+        cli_progress_update()
+    }
+    cli_progress_done()
+    result
 }
 
 .db_first <- local({
@@ -81,7 +91,7 @@ db <-
     if (overwrite)
         message("updating database and collections...")
     db <- .db(overwrite)
-    details <- lapply(db$collection_id, .db_detail, overwrite = overwrite)
+    details <- .db_detail(db$collection_id, overwrite)
     errors <- vapply(details, inherits, logical(1), "error")
     if (any(errors)) {
         stop(

@@ -1,3 +1,9 @@
+# cellxgenedp 1.10
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+* (v.1.9.1) Add progress bar when updated `db()`
+
 # cellxgenedp 1.8
 
 SIGNIFICANT USER-VISIBLE CHANGES
